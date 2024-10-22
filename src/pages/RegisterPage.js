@@ -16,14 +16,14 @@ const RegisterPage = () => {
     // 버튼 눌렀을 때 refresh 막음
     event.preventDefault();
     try {
-      if (!password) {
-        throw new Error("비밀번호를 입력하세요");
+      if (!name) {
+        throw new Error("이름을 입력하세요");
       }
       if (!email) {
         throw new Error("이메일을 입력하세요");
       }
-      if (!name) {
-        throw new Error("이름을 입력하세요");
+      if (!password) {
+        throw new Error("비밀번호를 입력하세요");
       }
       if (password !== secPassword) {
         throw new Error("패스워드가 일치하지 않습니다. 다시 입력해주세요");
@@ -36,7 +36,12 @@ const RegisterPage = () => {
         throw new Error(response.data.error);
       }
     } catch (error) {
-      setError(error.message);
+      console.log(error);
+      if (error.error) {
+        setError(error.error);
+      } else {
+        setError(error.message);
+      }
     }
   };
 

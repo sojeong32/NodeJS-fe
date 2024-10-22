@@ -9,22 +9,22 @@ import PrivateRoute from "./route/PrivateRoute";
 import api from "./utils/api";
 
 function App() {
-  const [user, setUser] = useState(null);
-  const getUser = async () => {
-    try {
-      const token = sessionStorage.getItem("token");
-      const response = api.get("/user/?????");
-    } catch (error) {}
-  };
+  // const [user, setUser] = useState(null);
+  // const getUser = async () => {
+  //   try {
+  //     const token = sessionStorage.getItem("token");
+  //     const response = api.get("/user/?????");
+  //   } catch (error) {}
+  // };
 
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <PrivateRoute user={user}>
-            <TodoPage />
-          </PrivateRoute>
+          // <PrivateRoute user={user}>
+          <TodoPage />
+          // </PrivateRoute>
         }
       />
       <Route path="/register" element={<RegisterPage />} />
