@@ -4,13 +4,16 @@ import api from "../utils/api";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import { useNavigate } from "react-router-dom";
 
 const TodoPage = () => {
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState("");
+  const navigate = useNavigate();
 
   const getTasks = async () => {
     const response = await api.get("/tasks");
+    console.log("taskList",response.data.data)
     setTodoList(response.data.data);
   };
   useEffect(() => {
@@ -56,6 +59,12 @@ const TodoPage = () => {
       console.log("error", error);
     }
   };
+
+  const handleLogout = async () => {
+    sessionStorage.removeItem("token");
+    await navigate("/login");
+  }
+
   return (
     <Container>
       <Row className="add-item-row">
@@ -74,6 +83,7 @@ const TodoPage = () => {
           </button>
         </Col>
       </Row>
+      <button onClick={handleLogout}>로그아웃</button>
 
       <TodoBoard
         todoList={todoList}
